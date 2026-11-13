@@ -40,35 +40,55 @@ public:
         price = 0.0;
         speed = 0.0;
     }
+
+    virtual void MaxSpeed () const = 0;
+    virtual void FuelRasxod () const = 0;
+    virtual void Wheel () const = 0;
+    virtual void Passengers () const = 0;
 };
 
 class Moped : public Vehicle
 {
     int engine;
-    int seats;
     public:
     Moped() {}
-    Moped(int wh, string md, string col, int yr, double pr, double sp, int ev, int st) : Vehicle(wh, md, col, yr, pr, sp)
+    Moped(int wh, string md, string col, int yr, double pr, double sp, int ev) : Vehicle(wh, md, col, yr, pr, sp)
     {
         engine = ev;
-        seats = st;
     }
-    virtual void Print()
+    void Print()
     {
         Vehicle::Print();
         cout << "Engine Volume: " << engine << endl;
-        cout << "How many people can sit: " << seats << endl;
+        MaxSpeed();
+        FuelRasxod();
+        Wheel();
+        Passengers();
     }
-    virtual void Init() 
+    void Init() 
     {
-        wheels = 0;
-        model = "";
-        color = "";
-        year = 0;
-        price = 0.0;
-        speed = 0.0;
+        Vehicle::Init();
         engine = 0;
-        seats = 0;
+    }
+
+    void MaxSpeed() const 
+    { 
+        cout << "Max speed: 90 km/h" << endl; 
+    }
+    
+    void FuelRasxod() const 
+    { 
+        cout << "Fuel rasxod: 2.5 L/100km" << endl; 
+    }
+    
+    void Wheel() const
+    { 
+        cout << "Wheels count: " << wheels << endl; 
+    }
+    
+    void Passengers() const
+    {
+        cout << "Max passengers: 1" << endl; 
     }
 };
 
@@ -83,22 +103,41 @@ class Bicycle : public Vehicle
         tormoz = tr;
         basket = bs;
     }
-    virtual void Print()
+    void Print()
     {
         Vehicle::Print();
         cout << "Tormoz type: " << tormoz << endl;
         cout << "It has basket? : " << basket << endl;
+        MaxSpeed();
+        FuelRasxod();
+        Wheel();
+        Passengers();
     }
-    virtual void Init()
+    void Init()
     {
-        wheels = 0;
-        model = "";
-        color = "";
-        year = 0;
-        price = 0.0;
-        speed = 0.0;
+        Vehicle::Init();
         tormoz = "";
         basket = false;
+    }
+
+    void MaxSpeed() const 
+    { 
+        cout << "Max speed: 50 km/h" << endl; 
+    }
+    
+    void FuelRasxod() const 
+    { 
+        cout << "Fuel rasxod: None (Pedals)" << endl; 
+    }
+    
+    void Wheel() const 
+    { 
+        cout << "Wheels count: " << wheels << endl; 
+    }
+    
+    void Passengers() const 
+    {
+        cout << "Max passengers: 1" << endl; 
     }
 };
 
@@ -114,80 +153,126 @@ class Car : public Vehicle
         doors = dr;
         seats = st;
     }
-    virtual void Print()
+    void Print()
     {
         Vehicle::Print();
         cout << "Doors: " << doors << endl;
         cout << "How many people can sit: " << seats << endl;
+        MaxSpeed();
+        FuelRasxod();
+        Wheel();
+        Passengers();
     }
-    virtual void Init()
+    void Init()
     {
-        wheels = 0;
-        model = "";
-        color = "";
-        year = 0;
-        price = 0.0;
-        speed = 0.0;
+        Vehicle::Init();
         doors = 0;
         seats = 0;
+    }
+
+    void MaxSpeed() const 
+    { 
+        cout << "Max speed: 200 km/h" << endl; 
+    }
+    
+    void FuelRasxod() const 
+    { 
+        cout << "Fuel rasxod: 8.0 L/100km (Petrol/Electric)" << endl; 
+    }
+    
+    void Wheel() const 
+    { 
+        cout << "Wheels count: " << wheels << endl; 
+    }
+    
+    void Passengers() const 
+    {
+        cout << "Max passengers: 4" << endl; 
     }
 };
 
 class OffRoad : public Vehicle
 {
-    int seats;
     public:
     OffRoad() {}
-    OffRoad(int wh, string md, string col, int yr, double pr, double sp, bool st)
-        : Vehicle(wh, md, col, yr, pr, sp)
-    {
-        seats = st;
-    }
-    virtual void Print()
+    OffRoad(int wh, string md, string col, int yr, double pr, double sp, int st)
+        : Vehicle(wh, md, col, yr, pr, sp){}
+    void Print()
     {
         Vehicle::Print();
-        cout << "How many people can sit: " << seats << endl;
+        MaxSpeed();
+        FuelRasxod();
+        Wheel();
+        Passengers();
     }
-    virtual void Init()
+    void Init()
     {
-        wheels = 0;
-        model = "";
-        color = "";
-        year = 0;
-        price = 0.0;
-        speed = 0.0;
-        seats = 0;
+        Vehicle::Init();
+    }
+
+    void MaxSpeed() const 
+    { 
+        cout << "Max speed: 150 km/h" << endl; 
+    }
+    
+    void FuelRasxod() const 
+    { 
+        cout << "Fuel rasxod: 14.5 L/100km (Diesel)" << endl; 
+    }
+    
+    void Wheel() const 
+    { 
+        cout << "Wheels count: " << wheels << endl; 
+    }
+    
+    void Passengers() const 
+    {
+        cout << "Max passengers: 2" << endl; 
     }
 };
 
 class Bus : public Vehicle
 {
-    int passenger;
     int doors;
     public:
     Bus() {}
-    Bus(int wh, string md, string col, int yr, double pr, double sp, int pc, int dr)
+    Bus(int wh, string md, string col, int yr, double pr, double sp, int dr)
         : Vehicle(wh, md, col, yr, pr, sp)
     {
-        passenger = pc;
         doors = dr;
     }
-    virtual void Print()
+    void Print()
     {
         Vehicle::Print();
-        cout << "Passenger Capacity: " << passenger << endl;
         cout << "Count of doors: " << doors << endl;
+        MaxSpeed();
+        FuelRasxod();
+        Wheel();
+        Passengers();
     }
-    virtual void Init()
+    void Init()
     {
-        wheels = 0;
-        model = "";
-        color = "";
-        year = 0;
-        price = 0.0;
-        speed = 0.0;
-        passenger = 0;
+        Vehicle::Init();
         doors = 0;
+    }
+    void MaxSpeed() const 
+    { 
+        cout << "Max speed: 150 km/h" << endl; 
+    }
+    
+    void FuelRasxod() const 
+    { 
+        cout << "Fuel rasxod: 22.0 L/100km (Diesel)" << endl; 
+    }
+    
+    void Wheel() const 
+    { 
+        cout << "Wheels count: " << wheels << endl; 
+    }
+    
+    void Passengers() const 
+    {
+        cout << "Max passengers: 32" << endl; 
     }
 };
 
@@ -201,20 +286,39 @@ public:
     {
         loadCapacity = lc;
     }
-    virtual void Print()
+    void Print()
     {
         Vehicle::Print();
         cout << "Load Capacity: " << loadCapacity << " kg" << endl;
+        MaxSpeed();
+        FuelRasxod();
+        Wheel();
+        Passengers();
     }
-    virtual void Init()
+    void Init()
     {
-        wheels = 0;
-        model = "";
-        color = "";
-        year = 0;
-        price = 0.0;
-        speed = 0.0;
+        Vehicle::Init();
         loadCapacity = 0;
+    }
+
+    void MaxSpeed() const 
+    { 
+        cout << "Max speed: 150 km/h" << endl; 
+    }
+    
+    void FuelRasxod() const 
+    { 
+        cout << "Fuel rasxod: 30.0 L/100km (Diesel)" << endl; 
+    }
+    
+    void Wheel() const 
+    { 
+        cout << "Wheels count: " << wheels << endl; 
+    }
+    
+    void Passengers() const 
+    {
+        cout << "Max passengers: 2 drivers + 32" << endl; 
     }
 };
 
@@ -252,8 +356,6 @@ int main()
     cout << endl;
     */
 
-    //
-
     Vehicle* vehicle = nullptr;
 
     int choice = 0;
@@ -272,7 +374,7 @@ int main()
     switch (choice)
     {
         case 1:
-            vehicle = new Moped(2, "Yamaha Jog", "Black", 2022, 1850.5, 65.0, 49, 1);
+            vehicle = new Moped(2, "Yamaha Jog", "Black", 2022, 1850.5, 65.0, 49);
             break;
         case 2:
             vehicle = new Bicycle(2, "Giant Talon", "Blue", 2024, 620.0, 30.0, "Hydraulic Disc", false);
@@ -284,7 +386,7 @@ int main()
             vehicle = new OffRoad(4, "Jeep Wrangler", "Dark Green", 2021, 38000.0, 175.0, 4);
             break;
         case 5: 
-            vehicle = new Bus(6, "Mercedes-Benz Sprinter", "Silver", 2020, 55000.0, 120.0, 20, 2);
+            vehicle = new Bus(6, "Mercedes-Benz Sprinter", "Silver", 2020, 55000.0, 120.0, 2);
             break;
         case 6: 
             vehicle = new Truck(8, "Volvo FH16", "White", 2022, 125000.0, 110.0, 20000.0);
