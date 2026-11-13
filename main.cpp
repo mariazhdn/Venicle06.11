@@ -22,7 +22,7 @@ public:
         price = pr;
         speed = sp;
     }
-    void Print()
+    virtual void Print()
     {
         cout << "Wheels: " << wheels << endl;
         cout << "Model: " << model << endl;
@@ -31,7 +31,7 @@ public:
         cout << "Price: " << price << endl;
         cout << "Speed: " << speed << " km/h" << endl;
     }
-    void Init()
+    virtual void Init()
     {
         wheels = 0;
         model = "";
@@ -53,11 +53,22 @@ class Moped : public Vehicle
         engine = ev;
         seats = st;
     }
-    void Print()
+    virtual void Print()
     {
         Vehicle::Print();
         cout << "Engine Volume: " << engine << endl;
         cout << "How many people can sit: " << seats << endl;
+    }
+    virtual void Init() 
+    {
+        wheels = 0;
+        model = "";
+        color = "";
+        year = 0;
+        price = 0.0;
+        speed = 0.0;
+        engine = 0;
+        seats = 0;
     }
 };
 
@@ -72,11 +83,22 @@ class Bicycle : public Vehicle
         tormoz = tr;
         basket = bs;
     }
-    void Print()
+    virtual void Print()
     {
         Vehicle::Print();
         cout << "Tormoz type: " << tormoz << endl;
         cout << "It has basket? : " << basket << endl;
+    }
+    virtual void Init()
+    {
+        wheels = 0;
+        model = "";
+        color = "";
+        year = 0;
+        price = 0.0;
+        speed = 0.0;
+        tormoz = "";
+        basket = false;
     }
 };
 
@@ -92,11 +114,22 @@ class Car : public Vehicle
         doors = dr;
         seats = st;
     }
-    void Print()
+    virtual void Print()
     {
         Vehicle::Print();
         cout << "Doors: " << doors << endl;
         cout << "How many people can sit: " << seats << endl;
+    }
+    virtual void Init()
+    {
+        wheels = 0;
+        model = "";
+        color = "";
+        year = 0;
+        price = 0.0;
+        speed = 0.0;
+        doors = 0;
+        seats = 0;
     }
 };
 
@@ -110,10 +143,20 @@ class OffRoad : public Vehicle
     {
         seats = st;
     }
-    void Print()
+    virtual void Print()
     {
         Vehicle::Print();
         cout << "How many people can sit: " << seats << endl;
+    }
+    virtual void Init()
+    {
+        wheels = 0;
+        model = "";
+        color = "";
+        year = 0;
+        price = 0.0;
+        speed = 0.0;
+        seats = 0;
     }
 };
 
@@ -129,11 +172,22 @@ class Bus : public Vehicle
         passenger = pc;
         doors = dr;
     }
-    void Print()
+    virtual void Print()
     {
         Vehicle::Print();
         cout << "Passenger Capacity: " << passenger << endl;
         cout << "Count of doors: " << doors << endl;
+    }
+    virtual void Init()
+    {
+        wheels = 0;
+        model = "";
+        color = "";
+        year = 0;
+        price = 0.0;
+        speed = 0.0;
+        passenger = 0;
+        doors = 0;
     }
 };
 
@@ -147,15 +201,26 @@ public:
     {
         loadCapacity = lc;
     }
-    void Print()
+    virtual void Print()
     {
         Vehicle::Print();
         cout << "Load Capacity: " << loadCapacity << " kg" << endl;
+    }
+    virtual void Init()
+    {
+        wheels = 0;
+        model = "";
+        color = "";
+        year = 0;
+        price = 0.0;
+        speed = 0.0;
+        loadCapacity = 0;
     }
 };
 
 int main()
 {
+    /*
     Moped myMoped(2, "Yamaha Jog", "Black", 2022, 1850.5, 65.0, 49, 1);
     cout << " Moped: " << endl;
     myMoped.Print();
@@ -185,6 +250,51 @@ int main()
     cout << " Truck: " << endl;
     myTruck.Print();
     cout << endl;
+    */
+
+    //
+
+    Vehicle* vehicle = nullptr;
+
+    int choice = 0;
+
+    cout << "1. Moped" << endl;
+    cout << "2. Bicycle" << endl;
+    cout << "3. Car" << endl;
+    cout << "4. Off-Road" << endl;
+    cout << "5. Bus" << endl;
+    cout << "6. Truck" << endl;
+
+    cout << "\nEnter your choice: ";
+    cin >> choice;
+    cout << endl;
+
+    switch (choice)
+    {
+        case 1:
+            vehicle = new Moped(2, "Yamaha Jog", "Black", 2022, 1850.5, 65.0, 49, 1);
+            break;
+        case 2:
+            vehicle = new Bicycle(2, "Giant Talon", "Blue", 2024, 620.0, 30.0, "Hydraulic Disc", false);
+            break;
+        case 3: 
+            vehicle = new Car(4, "Audi e-tron GT", "Daytona Gray", 2024, 105000.0, 245.0, 4, 5);
+            break;
+        case 4: 
+            vehicle = new OffRoad(4, "Jeep Wrangler", "Dark Green", 2021, 38000.0, 175.0, 4);
+            break;
+        case 5: 
+            vehicle = new Bus(6, "Mercedes-Benz Sprinter", "Silver", 2020, 55000.0, 120.0, 20, 2);
+            break;
+        case 6: 
+            vehicle = new Truck(8, "Volvo FH16", "White", 2022, 125000.0, 110.0, 20000.0);
+            break;
+        default:
+            cout << "Wrong choice!" << endl;
+            return 1;
+    }
+
+    vehicle->Print();
 
     return 0;
 }
